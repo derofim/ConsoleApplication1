@@ -17,7 +17,6 @@ notifications:
   email: false
 before_deploy:
   - ls
-  - ls
 deploy:
   provider: releases
   api-key: "cac8cf3b5a5d4f8b5d3d851f976137c17cfc811a"
