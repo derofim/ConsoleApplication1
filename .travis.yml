@@ -17,12 +17,19 @@ notifications:
   email: false
 before_deploy:
   - ls
+  - git config --global user.email "builds@travis-ci.com"
+  - git config --global user.name "Travis CI"
+  - export GIT_TAG=$TRAVIS_BRANCH-v0.1.$TRAVIS_BUILD_NUMBER
+  - git tag $GIT_TAG -a -m "Generated tag from TravisCI for build $TRAVIS_BUILD_NUMBER"
+  - git push -q https://1e5c27003d64c633c33c5f68f18875588f849036@github.com/derofim/ConsoleApplication1 --tags
+
 deploy:
   provider: releases
   api_key:
     secure: eHsYT4JAmrf8bhZptq2xjenpAwLYpnrBxG/DtmILigHX2+pq+pNKcLgQkfiXCqptYP2vDialtmXY6igP0DprwnXBdncjuth6jPDw0dWC1/A2yD39jEPyL9EiKFxjQA1JmlYCJESR8XV7AjGnPVSf7j9s41jk5u/bJY44/rnCMERi6/Q0Y4bU9X/2ZgRRzoOPXvaT013aFijVcB9hsB8FR90yi4K1oni7/mGS5pbHOcbo6XIgfvz12kgRzmFcjfbPmf4fR9r13I3McCSdgWTlpRF4dPOjo56YjKZW1x5E7orwa6fOvrUtH6rK8Qwv2wQv8MI8tNk3qUa2p4huFtnDDc/f5t1Kew+s3uMOP7tt+l0rEOq8OnNIjjYegiY/4g4sl2efZNqRzO/kTKgd8F6tINIgeRRkr/wWgZqo0ewUN0jvu7NWGs5YbwdlgohCGbkPlQkqSV0vMBYlLt/qP0yWRz6vQ4ZlZJL63itCWTU8MyFhSsRsUmpqG1zyBQ3DvLVxyCamxyQLZAXQZPr/tEZxlVj0EJVU6cYy6yDtiWFDWX4u/MNUGBp3aEQ89u4FdCU4ElCJPTB+0Piii5L1Zt3Bk4gb/AD2DDQVYhXFKrCnXO4oIJLSIfbCbYxYNT4/qaC418Lc1KxJsEPFVUxoxV+aOTSrM0mhMoUqsGWCjOL7edk=
   file: "hello"
   skip_cleanup: true
-  tags: true
+  tags: false
+  all_branches: true
   on:
     repo: derofim/ConsoleApplication1
