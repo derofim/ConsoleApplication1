@@ -31,4 +31,4 @@ deploy:
     - "hello"
   skip_cleanup: true
   on:
-    tags: true
+    tags: false
