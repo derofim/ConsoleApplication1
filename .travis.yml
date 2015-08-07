@@ -17,6 +17,7 @@ notifications:
   email: false
 before_deploy:
   - ls
+  - ls
 deploy:
   skip_cleanup: true
   provider: releases
