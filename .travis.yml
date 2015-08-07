@@ -6,6 +6,7 @@ compiler:
 
 before_install:
   - echo $LANG
+  - travis setup releases
 
 install:
   - echo $LC_ALL
