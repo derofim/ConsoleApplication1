@@ -6,7 +6,6 @@ compiler:
 
 before_install:
   - sudo apt-get update -qq
-  - sudo gem install bundler
   - echo $LANG
   - echo $LC_ALL
   - if [ $TRAVIS_OS_NAME == linux ]; then sudo apt-get update && sudo apt-get install -y llvm-3.4 llvm-3.4-dev; fi
@@ -17,8 +16,10 @@ before_install:
   - gem --version
 
 install:
-  - bundle-update
+  - gem uninstall bundler
+  - gem install bundler --version '1.7.4'
   - bundle install
+  - bundle-update
   - npm install
   - ruby --version
   - gem --version
