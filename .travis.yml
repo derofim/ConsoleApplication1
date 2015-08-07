@@ -16,10 +16,7 @@ branches:
 notifications:
   email: false
 before_deploy:
-  - echo "${PWD##*/}"
-  - echo cd
-  - cd
-  - echo `basename $filename`
+  - ls
 deploy:
   skip_cleanup: true
   provider: releases
