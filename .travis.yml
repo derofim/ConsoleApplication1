@@ -12,7 +12,12 @@ before_install:
   - rvm use $RVM --install --binary --fuzzy
   - gem update --system
   - gem --version
+  - gem --version
 
+install:
+  - bundle install --path vendor/bundle
+  - npm install
+  
 before_script:
   - travis_retry bundle
   - if [ $TRAVIS_OS_NAME == linux ]; then travis_retry ./configure --llvm-config llvm-config-3.4; fi
