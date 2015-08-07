@@ -6,7 +6,6 @@ compiler:
 
 before_install:
   - echo $LANG
-  - travis setup releases
 
 install:
   - echo $LC_ALL
@@ -23,3 +22,13 @@ branches:
 
 notifications:
   email: false
+  
+deploy:
+  provider: releases
+  api_key: "adb8cf038f5da16367b2fa8a2fbff5e2548d81db"
+  file:
+    - "hello.exe"
+    - "hello"
+  skip_cleanup: true
+  on:
+    tags: true
