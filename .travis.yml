@@ -5,7 +5,6 @@ compiler:
   - clang
 
 before_install:
-  - sudo apt-get update -qq
   - echo $LANG
   - echo $LC_ALL
   - if [ $TRAVIS_OS_NAME == linux ]; then sudo apt-get update && sudo apt-get install -y llvm-3.4 llvm-3.4-dev; fi
@@ -13,13 +12,11 @@ before_install:
   - rvm use $RVM --install --binary --fuzzy
   - gem update --system
   - gem --version
-  - gem --version
 
 install:
   - gem uninstall bundler
   - gem install bundler --version '1.7.4'
   - bundle install
-  - npm install
   - ruby --version
   - gem --version
   
@@ -38,7 +35,7 @@ branches:
     - master
 
 notifications:
-  email: true
+  email: false
 
 env:
   - RVM=2.0.0 LANG="en_US.UTF-8"
