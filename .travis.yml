@@ -20,7 +20,7 @@ script:
 - if [ "$CXX" = "g++" ]; then export CXX="g++"; fi
 - if [ "$CXX" = "clang++" ]; then export CXX="clang++"; fi
 - cppcheck --error-exitcode=1 --quiet .
-- g++ Source.cpp -o hello-$CXX
+- gcc -Wall -fprofile-arcs -ftest-coverage Source.cpp -o hello-$CXX
 branches:
   only:
   - master
