@@ -2,35 +2,11 @@ env:
   global:
    # The next declaration is the encrypted COVERITY_SCAN_TOKEN, created
    #   via the "travis encrypt" command using the project repo's public key
-   - secure: "q97U7RzDbnHoRwL9EU9dmNyEdfnpJhG9EGYwAC3EwmMjxYPbX9KuhAAfv4r7Kyq9bAeZpTpqk7fmmyt/fMEul66/Omi5YdDShEzgrtTWPYcsFNKYNMAdARz8kheCJezOV4Y0kIf3wpXox4X8X/5ecTwU2je+he4M+ry5dAfH0gNxK9XxbbOTINxoaLgj/dkdjU3L5mBhHMWZL+BEY7FZtCYX19tGNlcMcuqfz+CuC8mhGMjE5jjMcR5izpH4VyrBKCtwJEGQp0steLzUeE7hkdTeOJlgb71e89fXfngEhxV/3a3jXhV5fJ3FjPE2/twi303/G2T9kgvQBUbZIbRpIEhiA3KYnLaPYNBIv5TbuYahDp3oi1yO2wUTa2taoRO/roVnCKGX0x8unXA42P8r01BYSEdkjnKn+5ldVUe/I3d6Jf7GWILOYmTKd3MWgo5MfvgJEi56qbOoZ9551l1w8M8Zwpt74hL7oq5AhQsD8xu7coGNcOggdyUIqV8IdRh4bAi0DMOS3mRMqb7+ZAkn7A4whn8fZJP1ZgAX7fbK7iTQIQ2796QpTSXMozZHcsNqjVO5bKZsSJ7aqbdA8QizPvqLHCmlBkdnWKNPzTXTQmquFkJQIx7tyiToRLpIgFL6Hl1t1JvjVBlIJy2YFsxGmfLy7kLM53NBcf3OBrqQK2g="
-addons:
-  coverity_scan:
-    project:
-      name: "derofim/ConsoleApplication1"
-      description: "ConsoleApplication1"
-    notification_email: derofim@yandex.ru
-    build_command:   "g++ Source.cpp -o hello-$CXX"
-    branch_pattern: master
-  apt:
-    packages:
-      - gcc-4.8
-      - g++-4.8
-      - clang
-      - uuid-dev
-      - libxml2-dev
-      - libcurl4-openssl-dev
-      - libcppunit-dev
-      - libnetcdf-dev
-      - libhdf4-dev
-      - libhdfeos-dev
-      - libgdal-dev
-      - libopenjpeg-dev
-      - libcfitsio3-dev
-      - libicu-dev
+   - secure: "oSTm+Tt+b7sEhnkYxM4bnR5L8pCuRclIrAH2t/p8e24B315oMOSgRlS9dkB6YTwbJzq6E9EZNZPBZ8sF6qGVatE4U6co+5Qatj25xYrY5mVdWeeODxQSAGya3Ix9LlISc8EVkVOUdFV0r8SI36YGxEW5lGjid9BtcpvQk5xrBDPnhbQYAttPrdY42Ej+oj7BJvmnJ8lzRUBmBN0O4Zj7y/Xl7oWMEPZ0orrmfSHzPGvwQWnkdgRzQ4jcKiMAc1BBETQFifm9lCJDPYXpVyRLh3E9XKfq9TKF5NVc0yID3neqJwshEkxyuveHIidbZ1/jZ3s1SC6nZCy0oq6MLS3n97kW1pZdlyS0Lqz2sEBM7gWfwd8asCUsdJQPRdquukoWOcWlaaMTOOX2XSc21+VL2HT9PfSaPKKxNbjRtIwmIvNFznwbbj5Uemb7pgnH74Pt/DkIgpUZF9OBELf2hGjin8EuZGyl+Jh9DPwTlS2q4BQnw//wGe2drvCGDCzdrljURDUs8otYfQm+yXS5+TWGggjyw3/J8eiuc50P7GiWQcch25Voi3XKbuVaRooxxehw3SuYnHCulKzIEckb7JlRKlTXkA0DwMThPbK7dpfAI1Co9m78nOFkaix96UZxrBTGmalF6Wcd+NCFPOzeofITYAV/RrtWIMKheV5hdcN4vmE="
 language: cpp
 compiler:
 - gcc
-- clang
+#- clang
 before_install:
 - echo $LANG
 install:
@@ -68,3 +44,27 @@ deploy:
   all_branches: true
   on:
     repo: derofim/ConsoleApplication1
+addons:
+  coverity_scan:
+    project:
+      name: "derofim/ConsoleApplication1"
+      description: "ConsoleApplication1"
+    notification_email: derofim@yandex.ru
+    build_command:   "g++ Source.cpp -o hello-$CXX"
+    branch_pattern: master
+  apt:
+    packages:
+      - gcc-4.8
+      - g++-4.8
+      - clang
+      - uuid-dev
+      - libxml2-dev
+      - libcurl4-openssl-dev
+      - libcppunit-dev
+      - libnetcdf-dev
+      - libhdf4-dev
+      - libhdfeos-dev
+      - libgdal-dev
+      - libopenjpeg-dev
+      - libcfitsio3-dev
+      - libicu-dev
