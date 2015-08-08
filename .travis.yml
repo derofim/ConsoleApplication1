@@ -51,7 +51,7 @@ addons:
       name: derofim/ConsoleApplication1
       description: ConsoleApplication1
     notification_email: derofim@yandex.ru
-    build_command_prepend: cov-configure --comptype gcc --compiler $CC && ./configure
+    build_command_prepend: cov-configure --gcc
     build_command: g++ Source.cpp -o hello-$CXX
     branch_pattern: master
   apt:
