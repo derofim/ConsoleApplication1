@@ -3,7 +3,7 @@ env:
   - secure: rYO9hVyY3+wCGnFNeAnlQsTr3mCe6ih2lbXtG7a04+0Or0joKYCkZQQOXlbLi1UcsUnMvj9TEPYUr9ojxUrPlT5Ppw/FM7FvXQTjQOXB/Ga/fXq4JZToFxEcsf7JU9b3gkU0F7bG5mrQ4MR/u3hqxYlngVCc8NQE5OyB6hAWNnalCCUXYzepPOI5zMqyLPZem95H5GzVT+XBkWMPr7ei5+FT4dG/Yb0QZrXDPFeaXK6OhOUkEowduh2RN/X9OLUxT7MMKJpH51ZpZM3VpVJqx7xQt1+bZ0vD2/pG01I7IJJ/GgColcnfdcJsJSrpuqq0qcXO+VQ5Z74MxNKPRifFBI7jvhQ1+Tk/2yc0sVbKuyH/IsWxZ6Tg1a0MGqHZWbmAGVtiL0zviIWTkE8WrNFdnWwxivqLJcgl3H88JdIWRlDnEWQir5tF+NBp+wmE2r1r/Y3k4dbXDCZMi2IBJdIB+FytIgUKrFp0sjaOmJQN05/Ctter6iqP4dsoVjrxAGLyoRzgAsKgdZ6b/Dukjj5YOxykodhE9q36n2HADrdOA5msnJlnhxsVV34/AIZSpWAWi57Wqx2afKKHhGbS4VenIpnbD7NsPTDhVjNTS6WHPFA/h75chn6I8cDnYeC4JmLGFazgUYYGZM7UX8lGIT6U1l/0ANotPD2SBU4ZJaMVD/Y=
 language: cpp
 compiler:
-- gcc
+- g++
 before_install:
 - sudo pip install cpp-coveralls
 - echo $LANG
@@ -16,7 +16,7 @@ before_script:
 - cd ConsoleApplication1
 script:
 - "$CXX --version"
-- ./configure --enable-gcov
+#- ./configure --enable-gcov
 - if [ "$CXX" = "g++" ]; then export CXX="g++"; fi
 - if [ "$CXX" = "clang++" ]; then export CXX="clang++"; fi
 - cppcheck --error-exitcode=1 --quiet .
@@ -42,7 +42,7 @@ deploy:
   api_key:
     secure: eHsYT4JAmrf8bhZptq2xjenpAwLYpnrBxG/DtmILigHX2+pq+pNKcLgQkfiXCqptYP2vDialtmXY6igP0DprwnXBdncjuth6jPDw0dWC1/A2yD39jEPyL9EiKFxjQA1JmlYCJESR8XV7AjGnPVSf7j9s41jk5u/bJY44/rnCMERi6/Q0Y4bU9X/2ZgRRzoOPXvaT013aFijVcB9hsB8FR90yi4K1oni7/mGS5pbHOcbo6XIgfvz12kgRzmFcjfbPmf4fR9r13I3McCSdgWTlpRF4dPOjo56YjKZW1x5E7orwa6fOvrUtH6rK8Qwv2wQv8MI8tNk3qUa2p4huFtnDDc/f5t1Kew+s3uMOP7tt+l0rEOq8OnNIjjYegiY/4g4sl2efZNqRzO/kTKgd8F6tINIgeRRkr/wWgZqo0ewUN0jvu7NWGs5YbwdlgohCGbkPlQkqSV0vMBYlLt/qP0yWRz6vQ4ZlZJL63itCWTU8MyFhSsRsUmpqG1zyBQ3DvLVxyCamxyQLZAXQZPr/tEZxlVj0EJVU6cYy6yDtiWFDWX4u/MNUGBp3aEQ89u4FdCU4ElCJPTB+0Piii5L1Zt3Bk4gb/AD2DDQVYhXFKrCnXO4oIJLSIfbCbYxYNT4/qaC418Lc1KxJsEPFVUxoxV+aOTSrM0mhMoUqsGWCjOL7edk=
   file:
-  - analysis-results.tgz
+  #- analysis-results.tgz
   - hello-$CXX
   skip_cleanup: true
   tags: false
