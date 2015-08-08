@@ -16,6 +16,7 @@ before_script:
 - cd ConsoleApplication1
 script:
 - "$CXX --version"
+- ./configure --enable-gcov
 - if [ "$CXX" = "g++" ]; then export CXX="g++"; fi
 - if [ "$CXX" = "clang++" ]; then export CXX="clang++"; fi
 - cppcheck --error-exitcode=1 --quiet .
