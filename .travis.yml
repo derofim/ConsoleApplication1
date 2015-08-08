@@ -19,7 +19,7 @@ before_deploy:
   - ls
   - git config --global user.email "builds@travis-ci.com"
   - git config --global user.name "Travis CI"
-  - export GIT_TAG=$TRAVIS_BRANCH-v0.1.$TRAVIS_BUILD_NUMBER.$LANG
+  - export GIT_TAG=$TRAVIS_BRANCH-v0.1.$TRAVIS_BUILD_NUMBER.$TRAVIS_JOB_NUMBER.$TRAVIS_TAG
   - git tag $GIT_TAG -a -m "Generated tag from TravisCI for build $TRAVIS_BUILD_NUMBER.$TRAVIS_TAG.$TRAVIS_JOB_NUMBER.$TRAVIS_OS_NAME"
   - git push -q https://1e5c27003d64c633c33c5f68f18875588f849036@github.com/derofim/ConsoleApplication1 --tags
   - git describe --tags --long
