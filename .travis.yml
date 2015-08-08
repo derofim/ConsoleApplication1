@@ -11,6 +11,22 @@ addons:
     notification_email: derofim@yandex.ru
     build_command:   "g++ Source.cpp -o hello-$CXX"
     branch_pattern: master
+  apt:
+    packages:
+      - gcc-4.8
+      - g++-4.8
+      - clang
+      - uuid-dev
+      - libxml2-dev
+      - libcurl4-openssl-dev
+      - libcppunit-dev
+      - libnetcdf-dev
+      - libhdf4-dev
+      - libhdfeos-dev
+      - libgdal-dev
+      - libopenjpeg-dev
+      - libcfitsio3-dev
+      - libicu-dev
 language: cpp
 compiler:
 - gcc
