@@ -1,3 +1,16 @@
+env:
+  global:
+   # The next declaration is the encrypted COVERITY_SCAN_TOKEN, created
+   #   via the "travis encrypt" command using the project repo's public key
+   - secure: "q97U7RzDbnHoRwL9EU9dmNyEdfnpJhG9EGYwAC3EwmMjxYPbX9KuhAAfv4r7Kyq9bAeZpTpqk7fmmyt/fMEul66/Omi5YdDShEzgrtTWPYcsFNKYNMAdARz8kheCJezOV4Y0kIf3wpXox4X8X/5ecTwU2je+he4M+ry5dAfH0gNxK9XxbbOTINxoaLgj/dkdjU3L5mBhHMWZL+BEY7FZtCYX19tGNlcMcuqfz+CuC8mhGMjE5jjMcR5izpH4VyrBKCtwJEGQp0steLzUeE7hkdTeOJlgb71e89fXfngEhxV/3a3jXhV5fJ3FjPE2/twi303/G2T9kgvQBUbZIbRpIEhiA3KYnLaPYNBIv5TbuYahDp3oi1yO2wUTa2taoRO/roVnCKGX0x8unXA42P8r01BYSEdkjnKn+5ldVUe/I3d6Jf7GWILOYmTKd3MWgo5MfvgJEi56qbOoZ9551l1w8M8Zwpt74hL7oq5AhQsD8xu7coGNcOggdyUIqV8IdRh4bAi0DMOS3mRMqb7+ZAkn7A4whn8fZJP1ZgAX7fbK7iTQIQ2796QpTSXMozZHcsNqjVO5bKZsSJ7aqbdA8QizPvqLHCmlBkdnWKNPzTXTQmquFkJQIx7tyiToRLpIgFL6Hl1t1JvjVBlIJy2YFsxGmfLy7kLM53NBcf3OBrqQK2g="
+addons:
+  coverity_scan:
+    project:
+      name: "derofim/ConsoleApplication1"
+      description: "ConsoleApplication1"
+    notification_email: derofim@yandex.ru
+    build_command:   "g++ Source.cpp -o hello-$CXX"
+    branch_pattern: master
 language: cpp
 compiler:
 - gcc
@@ -23,7 +36,7 @@ before_deploy:
   - git config --global user.email "builds@travis-ci.com"
   - git config --global user.name "Travis CI"
   - export GIT_TAG=$TRAVIS_BRANCH-$CXX-v0.1.$TRAVIS_BUILD_NUMBER.$TRAVIS_JOB_NUMBER
-  - git tag $GIT_TAG -a -m "TravisCI $TRAVIS_TAG.$TRAVIS_JOB_NUMBER.$TRAVIS_OS_NAME"
+  - git tag $GIT_TAG -a -m "TravisCI $TRAVIS_OS_NAME $CXX"
   - git push -q https://1e5c27003d64c633c33c5f68f18875588f849036@github.com/derofim/ConsoleApplication1 --tags
   - git describe --tags --long
 
