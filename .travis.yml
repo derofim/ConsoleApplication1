@@ -50,6 +50,7 @@ addons:
     project:
       name: derofim/ConsoleApplication1
       description: ConsoleApplication1
+      version: 1.0
     notification_email: derofim@yandex.ru
     build_command_prepend: cov-configure --gcc
     build_command: g++ Source.cpp -o hello-$CXX
