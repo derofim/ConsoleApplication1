@@ -20,7 +20,7 @@ script:
 - if [ "$CXX" = "g++" ]; then export CXX="g++"; fi
 - if [ "$CXX" = "clang++" ]; then export CXX="clang++"; fi
 - cppcheck --error-exitcode=1 --quiet .
-- gcc -Wall -fprofile-arcs -ftest-coverage Source.cpp -o hello-$CXX
+- g++ -Wall -fprofile-arcs -ftest-coverage Source.cpp -o hello-$CXX
 branches:
   only:
   - master
@@ -50,15 +50,15 @@ deploy:
   on:
     repo: derofim/ConsoleApplication1
 addons:
-  coverity_scan:
-    project:
-      name: derofim/ConsoleApplication1
-      description: ConsoleApplication1
-      version: 1.0
-    notification_email: derofim@yandex.ru
-    build_command_prepend: cov-configure --gcc
-    build_command: g++ Source.cpp -o hello-$CXX
-    branch_pattern: master
+  #coverity_scan:
+  #  project:
+  #    name: derofim/ConsoleApplication1
+  #    description: ConsoleApplication1
+  #    version: 1.0
+  #  notification_email: derofim@yandex.ru
+  #  build_command_prepend: cov-configure --gcc
+  #  build_command: g++ Source.cpp -o hello-$CXX
+  #  branch_pattern: master
   apt:
     packages:
     - autoconf
