@@ -1,22 +1,21 @@
 env:
   global:
-   # The next declaration is the encrypted COVERITY_SCAN_TOKEN, created
-   #   via the "travis encrypt" command using the project repo's public key
-   - secure: "oSTm+Tt+b7sEhnkYxM4bnR5L8pCuRclIrAH2t/p8e24B315oMOSgRlS9dkB6YTwbJzq6E9EZNZPBZ8sF6qGVatE4U6co+5Qatj25xYrY5mVdWeeODxQSAGya3Ix9LlISc8EVkVOUdFV0r8SI36YGxEW5lGjid9BtcpvQk5xrBDPnhbQYAttPrdY42Ej+oj7BJvmnJ8lzRUBmBN0O4Zj7y/Xl7oWMEPZ0orrmfSHzPGvwQWnkdgRzQ4jcKiMAc1BBETQFifm9lCJDPYXpVyRLh3E9XKfq9TKF5NVc0yID3neqJwshEkxyuveHIidbZ1/jZ3s1SC6nZCy0oq6MLS3n97kW1pZdlyS0Lqz2sEBM7gWfwd8asCUsdJQPRdquukoWOcWlaaMTOOX2XSc21+VL2HT9PfSaPKKxNbjRtIwmIvNFznwbbj5Uemb7pgnH74Pt/DkIgpUZF9OBELf2hGjin8EuZGyl+Jh9DPwTlS2q4BQnw//wGe2drvCGDCzdrljURDUs8otYfQm+yXS5+TWGggjyw3/J8eiuc50P7GiWQcch25Voi3XKbuVaRooxxehw3SuYnHCulKzIEckb7JlRKlTXkA0DwMThPbK7dpfAI1Co9m78nOFkaix96UZxrBTGmalF6Wcd+NCFPOzeofITYAV/RrtWIMKheV5hdcN4vmE="
+  - secure: rYO9hVyY3+wCGnFNeAnlQsTr3mCe6ih2lbXtG7a04+0Or0joKYCkZQQOXlbLi1UcsUnMvj9TEPYUr9ojxUrPlT5Ppw/FM7FvXQTjQOXB/Ga/fXq4JZToFxEcsf7JU9b3gkU0F7bG5mrQ4MR/u3hqxYlngVCc8NQE5OyB6hAWNnalCCUXYzepPOI5zMqyLPZem95H5GzVT+XBkWMPr7ei5+FT4dG/Yb0QZrXDPFeaXK6OhOUkEowduh2RN/X9OLUxT7MMKJpH51ZpZM3VpVJqx7xQt1+bZ0vD2/pG01I7IJJ/GgColcnfdcJsJSrpuqq0qcXO+VQ5Z74MxNKPRifFBI7jvhQ1+Tk/2yc0sVbKuyH/IsWxZ6Tg1a0MGqHZWbmAGVtiL0zviIWTkE8WrNFdnWwxivqLJcgl3H88JdIWRlDnEWQir5tF+NBp+wmE2r1r/Y3k4dbXDCZMi2IBJdIB+FytIgUKrFp0sjaOmJQN05/Ctter6iqP4dsoVjrxAGLyoRzgAsKgdZ6b/Dukjj5YOxykodhE9q36n2HADrdOA5msnJlnhxsVV34/AIZSpWAWi57Wqx2afKKHhGbS4VenIpnbD7NsPTDhVjNTS6WHPFA/h75chn6I8cDnYeC4JmLGFazgUYYGZM7UX8lGIT6U1l/0ANotPD2SBU4ZJaMVD/Y=
 language: cpp
 compiler:
 - gcc
-#- clang
 before_install:
 - echo $LANG
+- sudo apt-get install -qq cppcheck
 install:
 - echo $LC_ALL
 before_script:
 - cd ConsoleApplication1
 script:
-- $CXX --version
+- "$CXX --version"
 - if [ "$CXX" = "g++" ]; then export CXX="g++"; fi
 - if [ "$CXX" = "clang++" ]; then export CXX="clang++"; fi
+- cppcheck --error-exitcode=1 --quiet .
 - g++ Source.cpp -o hello-$CXX
 branches:
   only:
@@ -24,21 +23,21 @@ branches:
 notifications:
   email: false
 before_deploy:
-  - ls
-  - git config --global user.email "builds@travis-ci.com"
-  - git config --global user.name "Travis CI"
-  - export GIT_TAG=$TRAVIS_BRANCH-$CXX-v0.1.$TRAVIS_BUILD_NUMBER.$TRAVIS_JOB_NUMBER
-  - git tag $GIT_TAG -a -m "TravisCI $TRAVIS_OS_NAME $CXX"
-  - git push -q https://1e5c27003d64c633c33c5f68f18875588f849036@github.com/derofim/ConsoleApplication1 --tags
-  - git describe --tags --long
-
+- ls
+- git config --global user.email "builds@travis-ci.com"
+- git config --global user.name "Travis CI"
+- export GIT_TAG=$TRAVIS_BRANCH-$CXX-v0.1.$TRAVIS_BUILD_NUMBER.$TRAVIS_JOB_NUMBER
+- git tag $GIT_TAG -a -m "TravisCI $TRAVIS_OS_NAME $CXX"
+- git push -q https://1e5c27003d64c633c33c5f68f18875588f849036@github.com/derofim/ConsoleApplication1
+  --tags
+- git describe --tags --long
 deploy:
   provider: releases
   api_key:
     secure: eHsYT4JAmrf8bhZptq2xjenpAwLYpnrBxG/DtmILigHX2+pq+pNKcLgQkfiXCqptYP2vDialtmXY6igP0DprwnXBdncjuth6jPDw0dWC1/A2yD39jEPyL9EiKFxjQA1JmlYCJESR8XV7AjGnPVSf7j9s41jk5u/bJY44/rnCMERi6/Q0Y4bU9X/2ZgRRzoOPXvaT013aFijVcB9hsB8FR90yi4K1oni7/mGS5pbHOcbo6XIgfvz12kgRzmFcjfbPmf4fR9r13I3McCSdgWTlpRF4dPOjo56YjKZW1x5E7orwa6fOvrUtH6rK8Qwv2wQv8MI8tNk3qUa2p4huFtnDDc/f5t1Kew+s3uMOP7tt+l0rEOq8OnNIjjYegiY/4g4sl2efZNqRzO/kTKgd8F6tINIgeRRkr/wWgZqo0ewUN0jvu7NWGs5YbwdlgohCGbkPlQkqSV0vMBYlLt/qP0yWRz6vQ4ZlZJL63itCWTU8MyFhSsRsUmpqG1zyBQ3DvLVxyCamxyQLZAXQZPr/tEZxlVj0EJVU6cYy6yDtiWFDWX4u/MNUGBp3aEQ89u4FdCU4ElCJPTB+0Piii5L1Zt3Bk4gb/AD2DDQVYhXFKrCnXO4oIJLSIfbCbYxYNT4/qaC418Lc1KxJsEPFVUxoxV+aOTSrM0mhMoUqsGWCjOL7edk=
-  file: 
-  - "analysis-results.tgz"
-  - "hello-$CXX"
+  file:
+  - analysis-results.tgz
+  - hello-$CXX
   skip_cleanup: true
   tags: false
   all_branches: true
@@ -47,24 +46,28 @@ deploy:
 addons:
   coverity_scan:
     project:
-      name: "derofim/ConsoleApplication1"
-      description: "ConsoleApplication1"
+      name: derofim/ConsoleApplication1
+      description: ConsoleApplication1
     notification_email: derofim@yandex.ru
-    build_command:   "g++ Source.cpp -o hello-$CXX"
+    build_command: g++ Source.cpp -o hello-$CXX
     branch_pattern: master
   apt:
     packages:
-      - gcc-4.8
-      - g++-4.8
-      - clang
-      - uuid-dev
-      - libxml2-dev
-      - libcurl4-openssl-dev
-      - libcppunit-dev
-      - libnetcdf-dev
-      - libhdf4-dev
-      - libhdfeos-dev
-      - libgdal-dev
-      - libopenjpeg-dev
-      - libcfitsio3-dev
-      - libicu-dev
+    - autoconf
+    - automake
+    - build-essential
+    - cmake
+    - gdb
+    - libtool
+    - pkg-config
+    - unzip
+    - xclip
+    - clang-3.6
+    - g++-5
+    - gcc-5
+    - llvm-3.6-dev
+    - bzr-fastimport
+cache:
+  apt: true
+  directories:
+  - "${TRAVIS_BUILD_DIR}/.deps/build/src"
